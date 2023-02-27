@@ -1,0 +1,123 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "OpenAPI definition",
+		"version": "v0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:8080",
+			"description": "Generated server url"
+		}
+	],
+	"paths": {
+		"/api/audio": {
+			"get": {
+				"tags": [
+					"audio-controller"
+				],
+				"operationId": "getAllAudio",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/Audio"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"audio-controller"
+				],
+				"operationId": "createAudio",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Audio"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		},
+		"/api/audio/{artistName}": {
+			"get": {
+				"tags": [
+					"audio-controller"
+				],
+				"operationId": "getAudioByArtistName",
+				"parameters": [
+					{
+						"name": "artistName",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "object"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Audio": {
+				"type": "object",
+				"properties": {
+					"artistName": {
+						"type": "string"
+					},
+					"trackTitle": {
+						"type": "string"
+					},
+					"albumTitle": {
+						"type": "string"
+					},
+					"trackNumber": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"year": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"numberOfReviews": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"numberOfCopiesSold": {
+						"type": "integer",
+						"format": "int32"
+					}
+				}
+			}
+		}
+	}
+}
